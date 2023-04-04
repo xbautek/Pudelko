@@ -121,18 +121,18 @@ namespace PudelkoUnitTest
 
                 AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
             }
-            /*
+            
             [DataTestMethod, TestCategory("Constructors")]
             [DataRow(1.0, 2.5, 1.0, 2.5)]
             [DataRow(1.001, 2.599, 1.001, 2.599)]
             [DataRow(1.0019, 2.5999, 1.001, 2.599)]
             public void Constructor_2params_InMeters(double a, double b, double expectedA, double expectedB)
             {
-                Pudelko p = new Pudelko(a: a, b: b, type: UnitOfMeasure.meter);
+                Pudelko p = new Pudelko(A: a, B: b, type: UnitOfMeasure.meter);
 
                 AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
             }
-            
+            /*
             [DataTestMethod, TestCategory("Constructors")]
             [DataRow(11.0, 2.5, 0.11, 0.025)]
             [DataRow(100.1, 2.599, 1.001, 0.025)]

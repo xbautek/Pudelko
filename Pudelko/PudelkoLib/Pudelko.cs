@@ -33,10 +33,7 @@ namespace PudelkoNamespace.PudelkoLib
             }
         }
 
-
         public UnitOfMeasure Measure { get; set; }
-
-
 
         public Pudelko(double a, double b, double c, UnitOfMeasure type)
         {
@@ -64,19 +61,12 @@ namespace PudelkoNamespace.PudelkoLib
 
         public Pudelko(double A, double B, double C) : this(A, B, C, UnitOfMeasure.meter)
         {
-
         }
 
         public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
         {
-            
-            if(type == UnitOfMeasure.meter)
-            {
-                _c = _c/10;
-            }else if(type == UnitOfMeasure.milimeter)
-            {
-                _c=_c*10;
-            }
+
+            _c = _c / 100;
 
         }
 
@@ -132,12 +122,12 @@ namespace PudelkoNamespace.PudelkoLib
         {
             if(Measure == UnitOfMeasure.centimeter)
             {
-                return string.Format($"{A * 100:F3} centimeters × {B * 100:F3} centimeters × {C * 100:F3} centimeters");
+                return string.Format($"{A * 100:F3} cm × {B * 100:F3} cm × {C * 100:F3} cm");
 
             }
             else if (Measure == UnitOfMeasure.milimeter)
             {
-              return  string.Format($"{A* 1000 : F3} milimeters × {B* 1000 :F3} milimeters × {C * 1000:F3} milimeters");
+              return  string.Format($"{A* 1000 : F3} mm × {B* 1000 :F3} mm × {C * 1000:F3} mm");
 
             }
             else if (Measure == UnitOfMeasure.meter)
@@ -155,12 +145,12 @@ namespace PudelkoNamespace.PudelkoLib
         {
             if (format == "cm")
             {
-                return string.Format($"{A * 100:F1} centimeters × {B * 100:F1} centimeters × {C * 100:F1} centimeters");
+                return string.Format($"{A * 100:F1} cm × {B * 100:F1} cm × {C * 100:F1} cm");
 
             }
             else if (format == "mm")
             {
-                return string.Format($"{A * 1000:F0} milimeters × {B * 1000:F0} milimeters × {C * 1000:F0} milimeters");
+                return string.Format($"{A * 1000:F0} mm × {B * 1000:F0} mm × {C * 1000:F0} mm");
 
             }
             else if (format == "m")
