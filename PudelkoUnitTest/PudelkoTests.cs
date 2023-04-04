@@ -132,29 +132,29 @@ namespace PudelkoUnitTest
 
                 AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
             }
-            /*
+            
             [DataTestMethod, TestCategory("Constructors")]
             [DataRow(11.0, 2.5, 0.11, 0.025)]
             [DataRow(100.1, 2.599, 1.001, 0.025)]
             [DataRow(2.0019, 0.25999, 0.02, 0.002)]
             public void Constructor_2params_InCentimeters(double a, double b, double expectedA, double expectedB)
             {
-                Pudelko p = new Pudelko(unit: UnitOfMeasure.centimeter, a: a, b: b);
+                Pudelko p = new Pudelko(type: UnitOfMeasure.centimeter, A: a, B: b);
 
                 AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
             }
-
+            
             [DataTestMethod, TestCategory("Constructors")]
             [DataRow(11, 2.0, 0.011, 0.002)]
             [DataRow(100.1, 2599, 0.1, 2.599)]
             [DataRow(200.19, 2.5999, 0.2, 0.002)]
             public void Constructor_2params_InMilimeters(double a, double b, double expectedA, double expectedB)
             {
-                Pudelko p = new Pudelko(unit: UnitOfMeasure.milimeter, a: a, b: b);
+                Pudelko p = new Pudelko(type: UnitOfMeasure.milimeter, A: a, B: b);
 
                 AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
             }
-
+            /*
             // -------
 
             [DataTestMethod, TestCategory("Constructors")]

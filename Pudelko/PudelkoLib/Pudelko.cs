@@ -1,11 +1,12 @@
 ﻿using PudelkoNamespace.Enums;
 using System.Drawing;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PudelkoNamespace.PudelkoLib
 {
 
-    public sealed class Pudelko
+    public sealed class Pudelko : IFormattable
     {
         private double _a; 
         private double _b; 
@@ -66,14 +67,17 @@ namespace PudelkoNamespace.PudelkoLib
         public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
         {
 
-            _c = _c / 100;
+            if (type == UnitOfMeasure.meter) _c = _c / 100;
+
+            if (type == UnitOfMeasure.milimeter) _c = _c * 10;
+
 
         }
 
         public Pudelko(double A, double B) : this(A, B, 10, UnitOfMeasure.meter)
         {
 
-            _c= _c/100;
+             _c= _c/100;
 
         }
 
@@ -162,6 +166,25 @@ namespace PudelkoNamespace.PudelkoLib
             {
 
                 throw new FormatException("Bad format, avaible formats: 'mm', 'cm', 'm'.");
+            }
+        }
+
+        public string ToString(string? format, IFormatProvider? formatProvider)
+        {
+            if (string.IsNullOrEmpty(format)) format = "m";
+            if (formatProvider == null) formatProvider = CultureInfo.CurrentCulture;
+
+            switch (format.ToUpperInvariant())
+            {
+                
+                case "mm":
+                    return string.Format($"{A * 1000:F0} mm × {B * 1000:F0} mm × {C * 1000:F0} mm");
+                case "cm":
+                    return string.Format($"{A * 100:F1} cm × {B * 100:F1} cm × {C * 100:F1} cm");
+                case "m":
+                    return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
+                default:
+                    throw new FormatException("Bad format, avaible formats: 'mm', 'cm', 'm'.");
             }
         }
 
