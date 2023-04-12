@@ -34,6 +34,22 @@ namespace PudelkoNamespace.PudelkoLib
             }
         }
 
+        public double Objetosc
+        {
+            get
+            {
+                return Math.Round(_b * _b * _a, 9);
+            }
+        }
+
+        public double Pole
+        {
+            get
+            {
+                return Math.Round((_a * _b * 2)+ (_c * _b * 2) + (_c * _a * 2), 6);
+            }
+        }
+
         public UnitOfMeasure Measure { get; set; }
 
         public Pudelko(double a, double b, double c, UnitOfMeasure type)
@@ -44,12 +60,12 @@ namespace PudelkoNamespace.PudelkoLib
             }
             Measure = type;
 
-            if (A < 0 || B < 0 || C < 0)
+            if (a <= 0 || b <= 0 || c <= 0)
             {
                 throw new ArgumentOutOfRangeException("Dimensions of the box must be positive!");
             }
 
-            if (type == UnitOfMeasure.meter && (A > 10 || B > 10 || C > 10)) {
+            if (type == UnitOfMeasure.meter && (a > 10 || b > 10 || c > 10)) {
                 throw new ArgumentOutOfRangeException("Box is too big! Max: 10x10x10 Meters.");
             }
 
@@ -78,6 +94,14 @@ namespace PudelkoNamespace.PudelkoLib
         {
 
              _c= _c/100;
+
+        }
+
+        public Pudelko(double A) : this(A, 10, 10, UnitOfMeasure.meter)
+        {
+
+            _c = _c / 100;
+            _b = _b / 100;
 
         }
 
