@@ -235,15 +235,15 @@ namespace PudelkoUnitTest
                         {
                             Pudelko p = new Pudelko(a, b, c);
                         }
-            /*
+            
                         [DataTestMethod, TestCategory("Constructors")]
                         [DynamicData(nameof(DataSet1Meters_ArgumentOutOfRangeEx))]
                         [ExpectedException(typeof(ArgumentOutOfRangeException))]
                         public void Constructor_3params_InMeters_ArgumentOutOfRangeException(double a, double b, double c)
                         {
-                            Pudelko p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+                            Pudelko p = new Pudelko(a, b, c, type: UnitOfMeasure.meter);
                         }
-
+            
                         [DataTestMethod, TestCategory("Constructors")]
                         [DataRow(-1, 1, 1)]
                         [DataRow(1, -1, 1)]
@@ -272,9 +272,9 @@ namespace PudelkoUnitTest
                         [ExpectedException(typeof(ArgumentOutOfRangeException))]
                         public void Constructor_3params_InCentimeters_ArgumentOutOfRangeException(double a, double b, double c)
                         {
-                            Pudelko p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
+                            Pudelko p = new Pudelko(a, b, c, type: UnitOfMeasure.centimeter);
                         }
-
+            
 
                         [DataTestMethod, TestCategory("Constructors")]
                         [DataRow(-1, 1, 1)]
@@ -304,9 +304,9 @@ namespace PudelkoUnitTest
                         [ExpectedException(typeof(ArgumentOutOfRangeException))]
                         public void Constructor_3params_InMiliimeters_ArgumentOutOfRangeException(double a, double b, double c)
                         {
-                            Pudelko p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
+                            Pudelko p = new Pudelko(a, b, c, type: UnitOfMeasure.milimeter);
                         }
-
+            /*
 
                         public static IEnumerable<object[]> DataSet2Meters_ArgumentOutOfRangeEx => new List<object[]>
                     {

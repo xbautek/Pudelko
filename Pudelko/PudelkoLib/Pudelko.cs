@@ -60,12 +60,12 @@ namespace PudelkoNamespace.PudelkoLib
             }
             Measure = type;
 
-            if (a <= 0 || b <= 0 || c <= 0)
+            if (ReturnMeters(a, type) <= 0 || ReturnMeters(b, type) <= 0 || ReturnMeters(c, type) <= 0)
             {
                 throw new ArgumentOutOfRangeException("Dimensions of the box must be positive!");
             }
 
-            if (type == UnitOfMeasure.meter && (a > 10 || b > 10 || c > 10)) {
+            if (ReturnMeters(a,type) > 10 || ReturnMeters(b, type) > 10 || ReturnMeters(c, type) > 10) {
                 throw new ArgumentOutOfRangeException("Box is too big! Max: 10x10x10 Meters.");
             }
 
@@ -220,10 +220,14 @@ namespace PudelkoNamespace.PudelkoLib
             }
             else if (m == UnitOfMeasure.milimeter)
             {
+                if (value < 1) return 0;
+
                 return value / 1000;
             }
             else if (m == UnitOfMeasure.centimeter)
             {
+                if (value < 0.1) return 0;
+
                 return value / 100;
             }
             else throw new FormatException("Invalid type for MeasureType enum.");
