@@ -38,7 +38,7 @@ namespace PudelkoNamespace.PudelkoLib
         {
             get
             {
-                return Math.Round(_b * _b * _a, 9);
+                return Math.Round(_c * _b * _a, 9);
             }
         }
 
@@ -58,6 +58,7 @@ namespace PudelkoNamespace.PudelkoLib
             {
                  throw new FormatException("Invalid type for MeasureType enum.");
             }
+
             Measure = type;
 
             if (ReturnMeters(a, type) <= 0 || ReturnMeters(b, type) <= 0 || ReturnMeters(c, type) <= 0)
@@ -185,6 +186,10 @@ namespace PudelkoNamespace.PudelkoLib
             {
                 return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
 
+            }
+            else if(format == null)
+            {
+                return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
             }
             else
             {

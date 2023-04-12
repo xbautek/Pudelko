@@ -15,12 +15,21 @@ namespace ConsoleApp1
                
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
-                Pudelko abc = new Pudelko(-1.0, 2.5, 3.1);
+                Pudelko abc = new Pudelko(1.0019, 2.5999);
                 Console.WriteLine(abc.Objetosc);
                 Console.WriteLine(abc.Pole);
 
+                Console.WriteLine(abc.A);
+                Console.WriteLine(abc.B);
+
+                Console.WriteLine(abc.C);
+
+                string abcd = "2.69999";
+                Console.WriteLine(Convert.ToDouble(abcd));
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }

@@ -419,7 +419,7 @@ namespace PudelkoUnitTest
                         {
                             Pudelko p = new Pudelko(a, type: UnitOfMeasure.milimeter);
                         }
-            /*
+            
                         #endregion
 
 
@@ -433,7 +433,7 @@ namespace PudelkoUnitTest
 
                             Assert.AreEqual(expectedStringEN, p.ToString());
                         }
-
+            
                         [DataTestMethod, TestCategory("String representation")]
                         [DataRow(null, 2.5, 9.321, 0.1, "2.500 m × 9.321 m × 0.100 m")]
                         [DataRow("m", 2.5, 9.321, 0.1, "2.500 m × 9.321 m × 0.100 m")]
@@ -441,10 +441,10 @@ namespace PudelkoUnitTest
                         [DataRow("mm", 2.5, 9.321, 0.1, "2500 mm × 9321 mm × 100 mm")]
                         public void ToString_Formattable_Culture_EN(string format, double a, double b, double c, string expectedStringRepresentation)
                         {
-                            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+                            var p = new Pudelko(a, b, c, type: UnitOfMeasure.meter);
                             Assert.AreEqual(expectedStringRepresentation, p.ToString(format));
                         }
-
+            
                         [TestMethod, TestCategory("String representation")]
                         [ExpectedException(typeof(FormatException))]
                         public void ToString_Formattable_WrongFormat_FormatException()
@@ -453,14 +453,25 @@ namespace PudelkoUnitTest
                             var stringformatedrepreentation = p.ToString("wrong code");
                         }
 
-                        #endregion
+            #endregion
 
 
-                        #region Pole, Objêtoœæ ===================================
-                        // ToDo
+            #region Pole, Objêtoœæ ===================================
+            
+                        [DataTestMethod, TestCategory("Velocity property")]
+                        [DataRow(5.13, 6.36, 8.06, 262.972008)]
+                        [DataRow(2.5, 9.321, 0.1, 2.33025)]
+                        [DataRow(7.544, 9.821, 0.777, 57.567637848)]
+                        [DataRow(7.544321, 9.821353, 0.777999, 57.646177981)]
 
-                        #endregion
+                        public void Velocity_property(double a, double b, double c, double expectedValue)
+                        {
+                            var p = new Pudelko(a, b, c, type: UnitOfMeasure.meter);
+                            Assert.AreEqual(expectedValue, p.Objetosc);
+                        }
 
+            #endregion Pole, Objêtoœæ ===================================
+            /*
                         #region Equals ===========================================
                         // ToDo
                         #endregion
@@ -519,9 +530,9 @@ namespace PudelkoUnitTest
                         #endregion
 
                         #region Parsing =========================================
-            */
+            
             #endregion
-
+            */
         }
 
     }
