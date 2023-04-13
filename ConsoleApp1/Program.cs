@@ -15,7 +15,8 @@ namespace ConsoleApp1
                
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
-                Pudelko abc = new Pudelko(1.0019, 2.5999);
+                Pudelko abc = new Pudelko(1.025, 1.23, 2.33);
+                Pudelko abc1 = new Pudelko(1.23, 2.33, 1.025);
                 Console.WriteLine(abc.Objetosc);
                 Console.WriteLine(abc.Pole);
 
@@ -26,6 +27,8 @@ namespace ConsoleApp1
 
                 string abcd = "2.69999";
                 Console.WriteLine(Convert.ToDouble(abcd));
+
+                Console.WriteLine(abc == abc1);
 
 
             }

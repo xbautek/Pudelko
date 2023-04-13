@@ -470,12 +470,31 @@ namespace PudelkoUnitTest
                             Assert.AreEqual(expectedValue, p.Objetosc);
                         }
 
-            #endregion Pole, Objêtoœæ ===================================
-            /*
-                        #region Equals ===========================================
-                        // ToDo
-                        #endregion
+            [DataTestMethod, TestCategory("Field property")]
+            [DataRow(1,1,1,6)]
+            [DataRow(2.5,2.5,2.5,37.5)]
+            public void Field_property(double a, double b, double c, double expectedValue)
+            {
+                var p = new Pudelko(a, b, c);
+                Assert.AreEqual(expectedValue, p.Pole);
 
+            }
+
+            #endregion Pole, Objêtoœæ ===================================
+
+            #region Equals ===========================================
+
+            [DataTestMethod, TestCategory("Equals method tests")]
+            [DataRow(1, 2.1, 3.05, 1, 3.05, 2.1, )]
+            [DataRow(2.5, 2.5, 2.5, 37.5)]
+
+            public void Equals_method_test(double a, double b, double c, double a1, double b1, double c1, UnitOfMeasure unit)
+            {
+                throw new NotImplementedException();
+            }
+
+            #endregion
+            /*
                         #region Operators overloading ===========================
                         // ToDo
                         #endregion

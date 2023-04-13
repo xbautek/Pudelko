@@ -1,4 +1,6 @@
 ﻿using PudelkoNamespace.Enums;
+using System.Collections.Immutable;
+using System.Data.Common;
 using System.Drawing;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
@@ -6,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace PudelkoNamespace.PudelkoLib
 {
 
-    public sealed class Pudelko : IFormattable
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>
     {
         private double _a; 
         private double _b; 
@@ -70,8 +72,6 @@ namespace PudelkoNamespace.PudelkoLib
                 throw new ArgumentOutOfRangeException("Box is too big! Max: 10x10x10 Meters.");
             }
 
-
-
             _a = a;
             _b = b;
             _c = c;
@@ -83,27 +83,20 @@ namespace PudelkoNamespace.PudelkoLib
 
         public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
         {
-
             if (type == UnitOfMeasure.meter) _c = _c / 100;
 
             if (type == UnitOfMeasure.milimeter) _c = _c * 10;
-
-
         }
 
         public Pudelko(double A, double B) : this(A, B, 10, UnitOfMeasure.meter)
         {
-
              _c= _c/100;
-
         }
 
         public Pudelko(double A) : this(A, 10, 10, UnitOfMeasure.meter)
         {
-
             _c = _c / 100;
             _b = _b / 100;
-
         }
 
         public Pudelko(double A, UnitOfMeasure type = UnitOfMeasure.centimeter) : this(A, 10, 10, type)
@@ -193,7 +186,6 @@ namespace PudelkoNamespace.PudelkoLib
             }
             else
             {
-
                 throw new FormatException("Bad format, avaible formats: 'mm', 'cm', 'm'.");
             }
         }
@@ -204,8 +196,7 @@ namespace PudelkoNamespace.PudelkoLib
             if (formatProvider == null) formatProvider = CultureInfo.CurrentCulture;
 
             switch (format.ToUpperInvariant())
-            {
-                
+            {      
                 case "mm":
                     return string.Format($"{A * 1000:F0} mm × {B * 1000:F0} mm × {C * 1000:F0} mm");
                 case "cm":
@@ -238,5 +229,38 @@ namespace PudelkoNamespace.PudelkoLib
             else throw new FormatException("Invalid type for MeasureType enum.");
         }
 
+        public bool Equals(Pudelko? other)
+        {
+            if (other == null) return false;
+
+            double[] first = new double[3];
+            double[] second = new double[3];
+
+            first[0] = ReturnMeters(this.A, this.Measure);
+            first[1] = ReturnMeters(this.B, this.Measure);
+            first[2] = ReturnMeters(this.C, this.Measure);
+
+            second[0] =  ReturnMeters(other.A, other.Measure);
+            second[1] =  ReturnMeters(other.B, other.Measure);
+            second[2] =  ReturnMeters(other.C, other.Measure);
+
+            Array.Sort(first);
+            Array.Sort(second);
+
+            if (first[0] == second[0] && first[1] == second[1] && first[2] == second[2]) return true;
+            else return false;
+        }
+
+        public static bool operator ==(Pudelko? a, Pudelko? b)
+        {
+            if (a is null || b is null) return false; 
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Pudelko? a, Pudelko? b)
+        {
+            if (a is null || b is null) return false;
+            return !a.Equals(b);
+        }
     }
 }
