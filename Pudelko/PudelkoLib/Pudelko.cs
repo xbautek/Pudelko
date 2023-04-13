@@ -14,6 +14,25 @@ namespace PudelkoNamespace.PudelkoLib
         private double _b; 
         private double _c;
 
+        //indexer
+        public double this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:
+                        return A;
+                    case 1:
+                        return B;
+                    case 2:
+                        return C;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
         public  double A
         {
             get 
@@ -149,13 +168,12 @@ namespace PudelkoNamespace.PudelkoLib
             }
             else if (Measure == UnitOfMeasure.milimeter)
             {
-              return  string.Format($"{A* 1000 : F3} mm × {B* 1000 :F3} mm × {C * 1000:F3} mm");
+              return  string.Format($"{A* 1000:F3} mm × {B* 1000 :F3} mm × {C * 1000:F3} mm");
 
             }
             else if (Measure == UnitOfMeasure.meter)
             {
                 return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
-  
             }
             else
             {
@@ -204,7 +222,7 @@ namespace PudelkoNamespace.PudelkoLib
                 case "m":
                     return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
                 default:
-                    throw new FormatException("Bad format, avaible formats: 'mm', 'cm', 'm'.");
+                    return ToString();
             }
         }
 
@@ -212,19 +230,19 @@ namespace PudelkoNamespace.PudelkoLib
         {
             if (m == UnitOfMeasure.meter)
             {
-                return value;
+                return Math.Round(value,14);
             }
             else if (m == UnitOfMeasure.milimeter)
             {
                 if (value < 1) return 0;
 
-                return value / 1000;
+                return Math.Round(value / 1000,14);
             }
             else if (m == UnitOfMeasure.centimeter)
             {
                 if (value < 0.1) return 0;
 
-                return value / 100;
+                return Math.Round(value / 100, 14);
             }
             else throw new FormatException("Invalid type for MeasureType enum.");
         }
@@ -236,16 +254,23 @@ namespace PudelkoNamespace.PudelkoLib
             double[] first = new double[3];
             double[] second = new double[3];
 
-            first[0] = ReturnMeters(this.A, this.Measure);
-            first[1] = ReturnMeters(this.B, this.Measure);
-            first[2] = ReturnMeters(this.C, this.Measure);
+            first[0] = this.A;
+            first[1] = this.B; 
+            first[2] = this.C;
 
-            second[0] =  ReturnMeters(other.A, other.Measure);
-            second[1] =  ReturnMeters(other.B, other.Measure);
-            second[2] =  ReturnMeters(other.C, other.Measure);
+            second[0] =  other.A;
+            second[1] =  other.B;
+            second[2] =  other.C;
+
+            Console.WriteLine($"{first[0]}, {second[0]}");
+            Console.WriteLine($"{first[1]}, {second[1]}");
+            Console.WriteLine($"{first[2]}, {second[2]}");
 
             Array.Sort(first);
             Array.Sort(second);
+
+            //Console.WriteLine($"{first[0]}, {second[0]}");
+
 
             if (first[0] == second[0] && first[1] == second[1] && first[2] == second[2]) return true;
             else return false;
@@ -261,6 +286,19 @@ namespace PudelkoNamespace.PudelkoLib
         {
             if (a is null || b is null) return false;
             return !a.Equals(b);
+        }
+
+        public static Pudelko operator +(Pudelko a, Pudelko b)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+
+            }
+
+
+
+
+            return new Pudelko(1,1,1);
         }
     }
 }

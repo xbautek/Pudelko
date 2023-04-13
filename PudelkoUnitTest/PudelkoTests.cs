@@ -485,13 +485,41 @@ namespace PudelkoUnitTest
             #region Equals ===========================================
 
             [DataTestMethod, TestCategory("Equals method tests")]
-            [DataRow(1, 2.1, 3.05, 1, 3.05, 2.1 )]
-            [DataRow(2.5, 2.5, 2.5, 37.5)]
-
-            public void Equals_method_test(double a, double b, double c, double a1, double b1, double c1, UnitOfMeasure unit)
+            [DataRow(1, 2.1, 3.05, 1, 3.05, 2.1)]
+            [DataRow(2.5, 2.5, 7.5, 2.5, 2.5, 7.5)]
+            public void Equals_method_test_defaultmeters(double a, double b, double c, double a1, double b1, double c1)
             {
-                throw new NotImplementedException();
+                Pudelko x = new Pudelko(a,b,c);
+                Pudelko y = new Pudelko(a1,b1,c1);
+
+                Assert.IsTrue(x.Equals(y));
             }
+
+            [DataTestMethod, TestCategory("Equals method tests")]
+            [DataRow(100, 240, 360, 3600, 1000, 2400)]
+            [DataRow(25.5, 27.4, 75.3, 255, 274, 753)]
+            public void Equals_method_test_Centimetersandmilimeters(double a, double b, double c, double a1, double b1, double c1)
+            {
+                Pudelko x = new Pudelko(a, b, c, UnitOfMeasure.centimeter);
+                Pudelko y = new Pudelko(a1, b1, c1, UnitOfMeasure.milimeter);
+
+                Assert.IsTrue(x.Equals(y));
+                Assert.IsTrue(x == y);
+            }
+
+            [DataTestMethod, TestCategory("Equals method tests")]
+            [DataRow(2.756, 10, 9.999, 10000, 2756, 9999)]
+            [DataRow(5.52, 7.41, 5.33, 5330, 5520, 7410)]
+            public void Equals_method_test_MetersAndMilimeters(double a, double b, double c, double a1, double b1, double c1)
+            {
+                Pudelko x = new Pudelko(a, b, c, UnitOfMeasure.meter);
+                Pudelko y = new Pudelko(a1, b1, c1, UnitOfMeasure.milimeter);
+
+                Assert.IsTrue(x.Equals(y));
+                Assert.IsFalse(x!=y);
+            }
+
+
 
             #endregion
             /*
