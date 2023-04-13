@@ -485,7 +485,7 @@ namespace PudelkoUnitTest
             #region Equals ===========================================
 
             [DataTestMethod, TestCategory("Equals method tests")]
-            [DataRow(1, 2.1, 3.05, 1, 3.05, 2.1, )]
+            [DataRow(1, 2.1, 3.05, 1, 3.05, 2.1 )]
             [DataRow(2.5, 2.5, 2.5, 37.5)]
 
             public void Equals_method_test(double a, double b, double c, double a1, double b1, double c1, UnitOfMeasure unit)
