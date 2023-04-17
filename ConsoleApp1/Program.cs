@@ -18,10 +18,10 @@ namespace ConsoleApp1
 
                 //[DataRow(100, 240, 360, 3600, 1000, 2400)]
                // [DataRow(25.5, 27.4, 75.3, 255, 274, 753)]
-                Pudelko abc = new Pudelko(10, 10, 0.001);
-                Pudelko abc1 = new Pudelko(1, 1, 1);
+                Pudelko abc = new Pudelko(7, 7, 7, UnitOfMeasure.meter);
+                Pudelko abc1 = new Pudelko(1, 1, 5, UnitOfMeasure.meter);
 
-                Console.WriteLine(abc[1]);
+                Console.WriteLine(abc + abc1);
 
                 
 

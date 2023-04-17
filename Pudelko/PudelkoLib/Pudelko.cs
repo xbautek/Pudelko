@@ -290,15 +290,200 @@ namespace PudelkoNamespace.PudelkoLib
 
         public static Pudelko operator +(Pudelko a, Pudelko b)
         {
-            for(int i = 0; i < 2; i++)
-            {
+            double objetosc = 2000000000000;
+            double x = 1, y = 1, z = 1;
 
+            // A: a i b, B: a:0 i b:1
+            if (Math.Max(a[0], a[1]) >= Math.Max(b[0], b[1]) && Math.Min(a[0], a[1]) >= Math.Min(b[0], b[1]))
+            {
+                if((a[0] * a[1] * (a[2] + b[2])) < objetosc)
+                {
+                    objetosc = a[0] * a[1] * (a[2] + b[2]);
+                    x = a[0]; y = a[1]; z = a[2] + b[2];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // A: a i b, B: a:0 i c:2
+            if (Math.Max(a[0], a[1]) >= Math.Max(b[0], b[2]) && Math.Min(a[0], a[1]) >= Math.Min(b[0], b[2]))
+            {
+                if ((a[0] * a[1] * (a[2] + b[1])) < objetosc)
+                {
+                    objetosc = a[0] * a[1] * (a[2] + b[1]);
+                    x = a[0]; y = a[1]; z = a[2] + b[1];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // A: a i b, B: b:1 i c:2
+            if (Math.Max(a[0], a[1]) >= Math.Max(b[1], b[2]) && Math.Min(a[0], a[1]) >= Math.Min(b[1], b[2]))
+            {
+                if ((a[0] * a[1] * (a[2] + b[0])) < objetosc)
+                {
+                    objetosc = a[0] * a[1] * (a[2] + b[0]);
+                    x = a[0]; y = a[1]; z = a[2] + b[0];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
             }
 
+            // A: b i c, B: a:0 i b:1
+            if (Math.Max(a[1], a[2]) >= Math.Max(b[0], b[1]) && Math.Min(a[1], a[2]) >= Math.Min(b[0], b[1]))
+            {
+                if ((a[1] * a[2] * (a[0] + b[2])) < objetosc)
+                {
+                    objetosc = a[1] * a[2] * (a[0] + b[2]);
+                    x = a[1]; y = a[2]; z = a[0] + b[2];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // A: b i c, B: a:0 i c:2
+            if (Math.Max(a[1], a[2]) >= Math.Max(b[0], b[2]) && Math.Min(a[1], a[2]) >= Math.Min(b[0], b[2]))
+            {
+                if ((a[1] * a[2] * (a[0] + b[1])) < objetosc)
+                {
+                    objetosc = a[1] * a[2] * (a[0] + b[1]);
+                    x = a[1]; y = a[2]; z = a[0] + b[1];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // A: b i c, B: b:1 i c:2
+            if (Math.Max(a[1], a[2]) >= Math.Max(b[1], b[2]) && Math.Min(a[1], a[2]) >= Math.Min(b[1], b[2]))
+            {
+                if ((a[1] * a[2] * (a[0] + b[0])) < objetosc)
+                {
+                    objetosc = a[1] * a[2] * (a[0] + b[0]);
+                    x = a[1]; y = a[2]; z = a[0] + b[0];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
 
+            // A: a i c, B: a:0 i b:1
+            if (Math.Max(a[0], a[2]) >= Math.Max(b[0], b[1]) && Math.Min(a[0], a[2]) >= Math.Min(b[0], b[1]))
+            {
+                if ((a[0] * a[2] * (a[1] + b[2])) < objetosc)
+                {
+                    objetosc = a[0] * a[2] * (a[1] + b[2]);
+                    x = a[0]; y = a[2]; z = a[1] + b[2];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+            // A: a i c, B: a:0 i c:2
+            if (Math.Max(a[0], a[2]) >= Math.Max(b[0], b[2]) && Math.Min(a[0], a[2]) >= Math.Min(b[0], b[2]))
+            {
+                if ((a[0] * a[2] * (a[1] + b[1])) < objetosc)
+                {
+                    objetosc = a[0] * a[2] * (a[1] + b[1]);
+                    x = a[0]; y = a[2]; z = a[1] + b[1];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
 
+            // A: a i c, B: b:1 i c:2
+            if (Math.Max(a[0], a[2]) >= Math.Max(b[1], b[2]) && Math.Min(a[0], a[2]) >= Math.Min(b[1], b[2]))
+            {
+                if ((a[0] * a[2] * (a[1] + b[0])) < objetosc)
+                {
+                    objetosc = a[0] * a[2] * (a[1] + b[0]);
+                    x = a[0]; y = a[2]; z = a[1] + b[0];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            return new Pudelko(1,1,1);
+            // B: a i b, A: a:0 i b:1
+            if (Math.Max(b[0], b[1]) >= Math.Max(a[0], a[1]) && Math.Min(b[0], b[1]) >= Math.Min(a[0], a[1]))
+            {
+                if ((b[0] * b[1] * (b[2] + a[2])) < objetosc)
+                {
+                    objetosc = b[0] * b[1] * (b[2] + a[2]);
+                    x = b[0]; y = b[1]; z = b[2] + a[2];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+
+            // B: a i b, A: a:0 i c:2
+            if (Math.Max(b[0], b[1]) >= Math.Max(a[0], a[2]) && Math.Min(b[0], b[1]) >= Math.Min(a[0], a[2]))
+            {
+                if ((b[0] * b[1] * (b[2] + a[1])) < objetosc)
+                {
+                    objetosc = b[0] * b[1] * (b[2] + a[1]);
+                    x = b[0]; y = b[1]; z = b[2] + a[1];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+
+            // B: a i b, A: b:1 i c:2
+            if (Math.Max(b[0], b[1]) >= Math.Max(a[1], a[2]) && Math.Min(b[0], b[1]) >= Math.Min(a[1], a[2]))
+            {
+                if ((b[0] * b[1] * (b[2] + a[0])) < objetosc)
+                {
+                    objetosc = b[0] * b[1] * (b[2] + a[0]);
+                    x = b[0]; y = b[1]; z = b[2] + a[0];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            
+            // B: b i c, A: a:0 i b:1
+            if (Math.Max(b[1], b[2]) >= Math.Max(a[0], a[1]) && Math.Min(b[1], b[2]) >= Math.Min(a[0], a[1]))
+            {
+                if ((b[1] * b[2] * (b[0] + a[2])) < objetosc)
+                {
+                    objetosc = b[1] * b[2] * (b[0] + a[2]);
+                    x = b[1]; y = b[2]; z = b[0] + a[2];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // B: b i c, A: a:0 i c:2
+            if (Math.Max(b[1], b[2]) >= Math.Max(a[0], a[2]) && Math.Min(b[1], b[2]) >= Math.Min(a[0], a[2]))
+            {
+                if ((b[1] * b[2] * (b[0] + a[1])) < objetosc)
+                {
+                    objetosc = b[1] * b[2] * (b[0] + a[1]);
+                    x = b[1]; y = b[2]; z = b[0] + a[1];
+                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
+                }
+            }
+            // B: b i c, A: b:1 i c:2
+            if (Math.Max(b[1], b[2]) >= Math.Max(a[1], a[2]) && Math.Min(b[1], b[2]) >= Math.Min(a[1], a[2]))
+            {
+                if ((b[1] * b[2] * (b[0] + a[0])) < objetosc)
+                {
+                    objetosc = b[1] * b[2] * (b[0] + a[0]);
+                    x = b[1]; y = b[2]; z = b[0] + a[0];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+
+            // B: a i c, A: a:0 i b:1
+            if (Math.Max(b[0], b[2]) >= Math.Max(a[0], a[1]) && Math.Min(b[0], b[2]) >= Math.Min(a[0], a[1]))
+            {
+                if ((b[0] * b[2] * (b[1] + a[2])) < objetosc)
+                {
+                    objetosc = b[0] * b[2] * (b[1] + a[2]);
+                    x = b[0]; y = b[2]; z = b[1] + a[2];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+            // B: a i c, A: a:0 i c:2
+            if (Math.Max(b[0], b[2]) >= Math.Max(a[0], a[2]) && Math.Min(b[0], b[2]) >= Math.Min(a[0], a[2]))
+            {
+                if ((b[0] * b[2] * (b[1] + a[1])) < objetosc)
+                {
+                    objetosc = b[0] * b[2] * (b[1] + a[1]);
+                    x = b[0]; y = b[2]; z = b[1] + a[1];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+            // B: a i c, A: b:1 i c:2
+            if (Math.Max(b[0], b[2]) >= Math.Max(a[1], a[2]) && Math.Min(b[0], b[2]) >= Math.Min(a[1], a[2]))
+            {
+                if ((b[0] * b[2] * (b[1] + a[0])) < objetosc)
+                {
+                    objetosc = b[0] * b[2] * (b[1] + a[0]);
+                    x = b[0]; y = b[2]; z = b[1] + a[0];
+                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
+                }
+            }
+
+            return new Pudelko(x,y,z);
         }
     }
 }
