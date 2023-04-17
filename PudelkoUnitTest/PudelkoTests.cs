@@ -522,7 +522,7 @@ namespace PudelkoUnitTest
 
 
             #endregion
-            /*
+            
                         #region Operators overloading ===========================
                         // ToDo
                         #endregion
@@ -538,7 +538,7 @@ namespace PudelkoUnitTest
                             Assert.AreEqual(p.B, tab[1]);
                             Assert.AreEqual(p.C, tab[2]);
                         }
-
+            
                         [TestMethod]
                         public void ImplicitConversion_FromAalueTuple_As_Pudelko_InMilimeters()
                         {
@@ -550,7 +550,7 @@ namespace PudelkoUnitTest
                         }
 
                         #endregion
-
+            
                         #region Indexer, enumeration ============================
                         [TestMethod]
                         public void Indexer_ReadFrom()
@@ -560,14 +560,14 @@ namespace PudelkoUnitTest
                             Assert.AreEqual(p.B, p[1]);
                             Assert.AreEqual(p.C, p[2]);
                         }
-
+            
                         [TestMethod]
                         public void ForEach_Test()
                         {
                             var p = new Pudelko(1, 2.1, 3.231);
                             var tab = new[] { p.A, p.B, p.C };
                             int i = 0;
-                            foreach (double x in p)
+                            foreach(double x in p)
                             {
                                 Assert.AreEqual(x, tab[i]);
                                 i++;
@@ -578,9 +578,7 @@ namespace PudelkoUnitTest
 
                         #region Parsing =========================================
             
-            #endregion
-            */
+                        #endregion 
         }
-
     }
 }

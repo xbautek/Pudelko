@@ -1,4 +1,5 @@
 ﻿using PudelkoNamespace.Enums;
+using System.Collections;
 using System.Collections.Immutable;
 using System.Data.Common;
 using System.Drawing;
@@ -8,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace PudelkoNamespace.PudelkoLib
 {
 
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
         private double _a; 
         private double _b; 
@@ -159,6 +160,7 @@ namespace PudelkoNamespace.PudelkoLib
             return base.GetHashCode();
         }
 
+        // reprezentacja tekstowa obiektu i przeciążenia
         public override string ToString()
         {
             if(Measure == UnitOfMeasure.centimeter)
@@ -226,6 +228,7 @@ namespace PudelkoNamespace.PudelkoLib
             }
         }
 
+        // funkcja pomocnicza zwracajaca metry
         public double ReturnMeters(double value, UnitOfMeasure m)
         {
             if (m == UnitOfMeasure.meter)
@@ -247,6 +250,7 @@ namespace PudelkoNamespace.PudelkoLib
             else throw new FormatException("Invalid type for MeasureType enum.");
         }
 
+        // operator równości
         public bool Equals(Pudelko? other)
         {
             if (other == null) return false;
@@ -276,6 +280,18 @@ namespace PudelkoNamespace.PudelkoLib
             else return false;
         }
 
+        public IEnumerator<double> GetEnumerator()
+        {
+            yield return A;
+            yield return B;
+            yield return C;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         public static bool operator ==(Pudelko? a, Pudelko? b)
         {
             if (a is null || b is null) return false; 
@@ -288,10 +304,11 @@ namespace PudelkoNamespace.PudelkoLib
             return !a.Equals(b);
         }
 
+        // operator dodawania dwóch pudełek
         public static Pudelko operator +(Pudelko a, Pudelko b)
         {
             double objetosc = 2000000000000;
-            double x = 1, y = 1, z = 1;
+            double x = 0, y = 0, z = 0;
 
             // A: a i b, B: a:0 i b:1
             if (Math.Max(a[0], a[1]) >= Math.Max(b[0], b[1]) && Math.Min(a[0], a[1]) >= Math.Min(b[0], b[1]))
@@ -303,6 +320,7 @@ namespace PudelkoNamespace.PudelkoLib
                     Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
+
             // A: a i b, B: a:0 i c:2
             if (Math.Max(a[0], a[1]) >= Math.Max(b[0], b[2]) && Math.Min(a[0], a[1]) >= Math.Min(b[0], b[2]))
             {
@@ -313,6 +331,7 @@ namespace PudelkoNamespace.PudelkoLib
                     Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
+
             // A: a i b, B: b:1 i c:2
             if (Math.Max(a[0], a[1]) >= Math.Max(b[1], b[2]) && Math.Min(a[0], a[1]) >= Math.Min(b[1], b[2]))
             {
@@ -334,6 +353,7 @@ namespace PudelkoNamespace.PudelkoLib
                     Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
+
             // A: b i c, B: a:0 i c:2
             if (Math.Max(a[1], a[2]) >= Math.Max(b[0], b[2]) && Math.Min(a[1], a[2]) >= Math.Min(b[0], b[2]))
             {
@@ -344,6 +364,7 @@ namespace PudelkoNamespace.PudelkoLib
                     Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
+
             // A: b i c, B: b:1 i c:2
             if (Math.Max(a[1], a[2]) >= Math.Max(b[1], b[2]) && Math.Min(a[1], a[2]) >= Math.Min(b[1], b[2]))
             {
@@ -484,6 +505,60 @@ namespace PudelkoNamespace.PudelkoLib
             }
 
             return new Pudelko(x,y,z);
+        }
+
+        public static explicit operator double[](Pudelko obj) => new double[] { obj.A, obj.B, obj.C };
+
+        public static implicit operator Pudelko((int x, int y, int z) tuple) => new Pudelko(tuple.x, tuple.y, tuple.z, UnitOfMeasure.milimeter);
+
+        public static Pudelko Parse(string text)
+        {
+            var values = text.Split(' ', 'x', ' ');
+            Console.WriteLine(values.Length);            
+            string[] valuesTemp = new string[6];
+
+            int i = 0;
+            foreach(var val in values)
+            {
+                if (!string.IsNullOrWhiteSpace(val))
+                {
+                    valuesTemp[i++] = val;
+                }
+            }
+
+            if (valuesTemp.Length != 6)
+            {
+                throw new ArgumentException("Invalid text format", nameof(text));
+            }
+
+            double.TryParse(valuesTemp[0], out double a);
+            double.TryParse(valuesTemp[2], out double b);
+            double.TryParse(valuesTemp[4], out double c);
+
+            string unitA = valuesTemp[1];
+            string unitB = valuesTemp[3];
+            string unitC = valuesTemp[5];
+
+            return new Pudelko(
+                a * ParseUnit(unitA),
+                b * ParseUnit(unitB),
+                c * ParseUnit(unitC)
+            );
+        }
+
+        private static double ParseUnit(string unit)
+        {
+            switch (unit)
+            {
+                case "m":
+                    return 1.0;
+                case "cm":
+                    return 0.01;
+                case "mm":
+                    return 0.001;
+                default:
+                    throw new ArgumentException($"Unknown unit: {unit}");
+            }
         }
     }
 }
