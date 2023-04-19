@@ -16,15 +16,25 @@ namespace ConsoleApp1
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
 
-                //[DataRow(100, 240, 360, 3600, 1000, 2400)]
-               // [DataRow(25.5, 27.4, 75.3, 255, 274, 753)]
-                Pudelko abc = new (7, 7, 4, UnitOfMeasure.meter);
-                Pudelko abc1 = new (5, 2, 8, UnitOfMeasure.meter);
+                List<Pudelko> list = new();
 
+                list.Add(new Pudelko(0.03, 0.01, 0.01,UnitOfMeasure.meter));
+                list.Add(new Pudelko(0.005, 0.03, 0.02, UnitOfMeasure.meter));
                 
 
-                var pudelko = Pudelko.Parse("1 mm x 1 m x 1 mm");
-                System.Console.WriteLine(Pudelko.Kompresuj(pudelko));
+
+                
+                foreach(Pudelko p in list)
+                {
+                    Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
+                }
+                list.Sort(CompareBox);
+                Console.WriteLine();
+                foreach (Pudelko p in list)
+                {
+                    Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
+                }
+
 
             }
             catch (Exception ex)
@@ -32,6 +42,25 @@ namespace ConsoleApp1
                 Console.WriteLine(ex.ToString());
             }
             
+        }
+
+        static int CompareBox(Pudelko x, Pudelko y)
+        {
+            if (x.Objetosc > y.Objetosc)
+                return 1;
+            else if (x.Objetosc < y.Objetosc)
+                return -1;
+            else
+            {
+                if(x.Pole > y.Pole) return 1;
+                else if(x.Pole < y.Pole) return -1;
+                else
+                {
+                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
+                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
+                    else return 0;
+                }
+            }
         }
     }
 }

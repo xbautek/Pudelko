@@ -56,7 +56,7 @@ namespace PudelkoNamespace.PudelkoLib
         {
             get
             {
-                return Math.Round(_c * _b * _a, 9);
+                return Math.Round(A * B * C, 9);
             }
         }
 
@@ -64,9 +64,11 @@ namespace PudelkoNamespace.PudelkoLib
         {
             get
             {
-                return Math.Round((_a * _b * 2)+ (_c * _b * 2) + (_c * _a * 2), 6);
+                return Math.Round((A * B * 2)+ (A * C * 2) + (B * C * 2), 6);
             }
         }
+
+        public double SumaKrawedzi => A+B+C;
 
         public UnitOfMeasure Measure { get; set; }
 
@@ -550,10 +552,8 @@ namespace PudelkoNamespace.PudelkoLib
         }
 
         public static Pudelko Kompresuj(Pudelko p)
-        {
-            
+        {         
             double dimension = Math.Pow(p.Objetosc, (double)1/3);
-
             return new Pudelko(dimension, dimension, dimension);
         }
     }
