@@ -18,14 +18,13 @@ namespace ConsoleApp1
 
                 //[DataRow(100, 240, 360, 3600, 1000, 2400)]
                // [DataRow(25.5, 27.4, 75.3, 255, 274, 753)]
-                Pudelko abc = new Pudelko(7, 7, 4, UnitOfMeasure.meter);
-                Pudelko abc1 = new Pudelko(5, 2, 8, UnitOfMeasure.meter);
+                Pudelko abc = new (7, 7, 4, UnitOfMeasure.meter);
+                Pudelko abc1 = new (5, 2, 8, UnitOfMeasure.meter);
 
-                Console.WriteLine(abc + abc1);
+                
 
-
-                var pudelko = Pudelko.Parse("1 cm x 1 m x 1 mm");
-                System.Console.WriteLine(pudelko);
+                var pudelko = Pudelko.Parse("1 mm x 1 m x 1 mm");
+                System.Console.WriteLine(Pudelko.Kompresuj(pudelko));
 
             }
             catch (Exception ex)

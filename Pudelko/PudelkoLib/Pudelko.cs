@@ -11,26 +11,22 @@ namespace PudelkoNamespace.PudelkoLib
 
     public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
-        private double _a; 
-        private double _b; 
-        private double _c;
+        private readonly double _a; 
+        private readonly double _b; 
+        private readonly double _c;
 
         //indexer
         public double this[int index]
         {
             get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0:
-                        return A;
-                    case 1:
-                        return B;
-                    case 2:
-                        return C;
-                    default:
-                        throw new IndexOutOfRangeException();
-                }
+                    0 => A,
+                    1 => B,
+                    2 => C,
+                    _ => throw new IndexOutOfRangeException(),
+                };
             }
         }
 
@@ -103,33 +99,33 @@ namespace PudelkoNamespace.PudelkoLib
 
         public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
         {
-            if (type == UnitOfMeasure.meter) _c = _c / 100;
+            if (type == UnitOfMeasure.meter) _c /= 100;
 
-            if (type == UnitOfMeasure.milimeter) _c = _c * 10;
+            if (type == UnitOfMeasure.milimeter) _c *= 10;
         }
 
         public Pudelko(double A, double B) : this(A, B, 10, UnitOfMeasure.meter)
         {
-             _c= _c/100;
+             _c /= 100;
         }
 
         public Pudelko(double A) : this(A, 10, 10, UnitOfMeasure.meter)
         {
-            _c = _c / 100;
-            _b = _b / 100;
+            _c /= 100;
+            _b /= 100;
         }
 
         public Pudelko(double A, UnitOfMeasure type = UnitOfMeasure.centimeter) : this(A, 10, 10, type)
         {
             if (type == UnitOfMeasure.meter)
             {
-                _c = _c / 100;
-                _b = _b / 100;
+                _c /= 100;
+                _b /= 100;
             }
             else if (type == UnitOfMeasure.milimeter)
             {
-                _c = _c * 10;
-                _b = _b * 10;
+                _c *=  10;
+                _b *= 10;
             }
         }
 
@@ -137,16 +133,16 @@ namespace PudelkoNamespace.PudelkoLib
         {
             if (type == UnitOfMeasure.meter)
             {
-                _c = _c / 100;
-                _b = _b / 100;
-                _a = _a / 100;
+                _c /= 100;
+                _b /= 100;
+                _a /= 100;
                 
             }
             else if (type == UnitOfMeasure.milimeter)
             {
-                _c = _c * 10;
-                _b = _b * 10;
-                _a = _a * 10;
+                _c *= 10;
+                _b *= 10;
+                _a *= 10;
             }
         }
 
@@ -213,23 +209,19 @@ namespace PudelkoNamespace.PudelkoLib
         public string ToString(string? format, IFormatProvider? formatProvider)
         {
             if (string.IsNullOrEmpty(format)) format = "m";
-            if (formatProvider == null) formatProvider = CultureInfo.CurrentCulture;
+            _ = formatProvider ?? CultureInfo.CurrentCulture;
 
-            switch (format.ToUpperInvariant())
-            {      
-                case "mm":
-                    return string.Format($"{A * 1000:F0} mm × {B * 1000:F0} mm × {C * 1000:F0} mm");
-                case "cm":
-                    return string.Format($"{A * 100:F1} cm × {B * 100:F1} cm × {C * 100:F1} cm");
-                case "m":
-                    return string.Format($"{A:F3} m × {B:F3} m × {C:F3} m");
-                default:
-                    return ToString();
-            }
+            return format.ToUpperInvariant() switch
+            {
+                "mm" => string.Format($"{A * 1000:F0} mm × {B * 1000:F0} mm × {C * 1000:F0} mm"),
+                "cm" => string.Format($"{A * 100:F1} cm × {B * 100:F1} cm × {C * 100:F1} cm"),
+                "m" => string.Format($"{A:F3} m × {B:F3} m × {C:F3} m"),
+                _ => ToString(),
+            };
         }
 
         // funkcja pomocnicza zwracajaca metry
-        public double ReturnMeters(double value, UnitOfMeasure m)
+        public static double ReturnMeters(double value, UnitOfMeasure m)
         {
             if (m == UnitOfMeasure.meter)
             {
@@ -509,7 +501,7 @@ namespace PudelkoNamespace.PudelkoLib
 
         public static explicit operator double[](Pudelko obj) => new double[] { obj.A, obj.B, obj.C };
 
-        public static implicit operator Pudelko((int x, int y, int z) tuple) => new Pudelko(tuple.x, tuple.y, tuple.z, UnitOfMeasure.milimeter);
+        public static implicit operator Pudelko((int x, int y, int z) tuple) => new (tuple.x, tuple.y, tuple.z, UnitOfMeasure.milimeter);
 
         public static Pudelko Parse(string text)
         {
@@ -531,9 +523,9 @@ namespace PudelkoNamespace.PudelkoLib
                 throw new ArgumentException("Invalid text format", nameof(text));
             }
 
-            double.TryParse(valuesTemp[0], out double a);
-            double.TryParse(valuesTemp[2], out double b);
-            double.TryParse(valuesTemp[4], out double c);
+            _ = double.TryParse(valuesTemp[0], out double a);
+            _ = double.TryParse(valuesTemp[2], out double b);
+            _ = double.TryParse(valuesTemp[4], out double c);
 
             string unitA = valuesTemp[1];
             string unitB = valuesTemp[3];
@@ -548,17 +540,21 @@ namespace PudelkoNamespace.PudelkoLib
 
         private static double ParseUnit(string unit)
         {
-            switch (unit)
+            return unit switch
             {
-                case "m":
-                    return 1.0;
-                case "cm":
-                    return 0.01;
-                case "mm":
-                    return 0.001;
-                default:
-                    throw new ArgumentException($"Unknown unit: {unit}");
-            }
+                "m" => 1.0,
+                "cm" => 0.01,
+                "mm" => 0.001,
+                _ => throw new ArgumentException($"Unknown unit: {unit}"),
+            };
+        }
+
+        public static Pudelko Kompresuj(Pudelko p)
+        {
+            
+            double dimension = Math.Pow(p.Objetosc, (double)1/3);
+
+            return new Pudelko(dimension, dimension, dimension);
         }
     }
 }
