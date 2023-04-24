@@ -280,7 +280,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[1] * (a[2] + b[2]);
                     x = a[0]; y = a[1]; z = a[2] + b[2];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -291,7 +290,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[1] * (a[2] + b[1]);
                     x = a[0]; y = a[1]; z = a[2] + b[1];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -302,7 +300,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[1] * (a[2] + b[0]);
                     x = a[0]; y = a[1]; z = a[2] + b[0];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -313,7 +310,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[1] * a[2] * (a[0] + b[2]);
                     x = a[1]; y = a[2]; z = a[0] + b[2];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -324,7 +320,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[1] * a[2] * (a[0] + b[1]);
                     x = a[1]; y = a[2]; z = a[0] + b[1];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -335,7 +330,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[1] * a[2] * (a[0] + b[0]);
                     x = a[1]; y = a[2]; z = a[0] + b[0];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
 
@@ -346,7 +340,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[2] * (a[1] + b[2]);
                     x = a[0]; y = a[2]; z = a[1] + b[2];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
             // A: a i c, B: a:0 i c:2
@@ -356,7 +349,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[2] * (a[1] + b[1]);
                     x = a[0]; y = a[2]; z = a[1] + b[1];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
 
@@ -367,7 +359,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = a[0] * a[2] * (a[1] + b[0]);
                     x = a[0]; y = a[2]; z = a[1] + b[0];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -379,7 +370,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[1] * (b[2] + a[2]);
                     x = b[0]; y = b[1]; z = b[2] + a[2];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -390,7 +380,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[1] * (b[2] + a[1]);
                     x = b[0]; y = b[1]; z = b[2] + a[1];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
 
@@ -401,7 +390,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[1] * (b[2] + a[0]);
                     x = b[0]; y = b[1]; z = b[2] + a[0];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
             
@@ -412,7 +400,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[1] * b[2] * (b[0] + a[2]);
                     x = b[1]; y = b[2]; z = b[0] + a[2];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
             // B: b i c, A: a:0 i c:2
@@ -422,7 +409,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[1] * b[2] * (b[0] + a[1]);
                     x = b[1]; y = b[2]; z = b[0] + a[1];
-                    Console.WriteLine($"{x}, {y}, {z},  {objetosc}");
                 }
             }
             // B: b i c, A: b:1 i c:2
@@ -432,7 +418,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[1] * b[2] * (b[0] + a[0]);
                     x = b[1]; y = b[2]; z = b[0] + a[0];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
 
@@ -443,7 +428,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[2] * (b[1] + a[2]);
                     x = b[0]; y = b[2]; z = b[1] + a[2];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
             // B: a i c, A: a:0 i c:2
@@ -453,7 +437,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[2] * (b[1] + a[1]);
                     x = b[0]; y = b[2]; z = b[1] + a[1];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
             // B: a i c, A: b:1 i c:2
@@ -463,7 +446,6 @@ namespace PudelkoNamespace.PudelkoLib
                 {
                     objetosc = b[0] * b[2] * (b[1] + a[0]);
                     x = b[0]; y = b[2]; z = b[1] + a[0];
-                    Console.WriteLine($"{x}, {y}, {z}, {objetosc}");
                 }
             }
 
@@ -477,7 +459,6 @@ namespace PudelkoNamespace.PudelkoLib
         public static Pudelko Parse(string text)
         {
             var values = text.Split(' ', 'x');
-            Console.WriteLine(values.Length);            
             string[] valuesTemp = new string[6];
 
             int i = 0;
