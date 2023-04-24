@@ -39,6 +39,12 @@ namespace ConsoleApp1
                     Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
                 }
 
+                Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
+                Pudelko sss = new(8, 1, 1);
+                Console.WriteLine(ss+sss);
+
+
+                Console.WriteLine(sss.ToString("cm"));
 
             }
             catch (Exception ex)

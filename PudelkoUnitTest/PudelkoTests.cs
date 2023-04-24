@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using System.Runtime.Intrinsics.X86;
 
 namespace PudelkoUnitTest
 {
@@ -522,13 +523,25 @@ namespace PudelkoUnitTest
 
 
             #endregion
-            
-                        #region Operators overloading ===========================
-                        // ToDo
-                        #endregion
 
-                        #region Conversions =====================================
-                        [TestMethod]
+            #region Operators overloading ===========================
+            // przeci¹¿enia operatorów == i != napisa³em przy okazji testowania metody Equals
+            [DataTestMethod, TestCategory("Plus operator test")]
+            [DataRow(2, 2, 2, 2, 2, 2, 4, 2, 2)]
+            [DataRow(7, 8, 2, 8, 1, 1, 8, 2, 8)]
+            public void Operator_Plus_Test(double a, double b, double c, double a1, double b1, double c1, double a2, double b2, double c2)
+            {
+                Pudelko x = new Pudelko(a, b, c, UnitOfMeasure.meter);
+                Pudelko y = new Pudelko(a1, b1, c1, UnitOfMeasure.meter);
+                Pudelko z = new Pudelko(a2, b2, c2, UnitOfMeasure.meter);
+
+                Assert.IsTrue(z.Equals(x+y));
+            }
+
+            #endregion
+
+            #region Conversions =====================================
+            [TestMethod]
                         public void ExplicitConversion_ToDoubleArray_AsMeters()
                         {
                             var p = new Pudelko(1, 2.1, 3.231);
@@ -574,11 +587,24 @@ namespace PudelkoUnitTest
                             }
                         }
 
-                        #endregion
+            #endregion
 
-                        #region Parsing =========================================
-            
-                        #endregion 
+            #region Parsing =========================================
+            //                 Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
+
+            [DataTestMethod]
+            [TestCategory("Parsing Test Method")]
+            [DataRow(1,1,1)]
+            public void Parsing(double a, double b, double c)
+            {
+                Pudelko abc = new(a, b, c, UnitOfMeasure.meter);
+                Pudelko abcstring = Pudelko.Parse($"{a} m x {b} m x {c} m");
+
+                Assert.IsTrue(abc.Equals(abcstring));
+            }
+
+
+            #endregion
         }
     }
 }

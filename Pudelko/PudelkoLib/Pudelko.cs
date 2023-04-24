@@ -30,47 +30,16 @@ namespace PudelkoNamespace.PudelkoLib
             }
         }
 
-        public  double A
-        {
-            get 
-            { 
-                return ReturnMeters(_a,Measure); 
-            }
-        }
-        public  double B 
-        { 
-            get 
-            {
-                return ReturnMeters(_b, Measure);
-            }
-        }
-        public  double C 
-        { 
-            get 
-            {
-                return ReturnMeters(_c, Measure);
-            }
-        }
+        public  double A => ReturnMeters(_a, Measure);
+        public  double B => ReturnMeters(_b, Measure);
+        public  double C => ReturnMeters(_c, Measure);
+        public UnitOfMeasure Measure { get; set; }
 
-        public double Objetosc
-        {
-            get
-            {
-                return Math.Round(A * B * C, 9);
-            }
-        }
-
-        public double Pole
-        {
-            get
-            {
-                return Math.Round((A * B * 2)+ (A * C * 2) + (B * C * 2), 6);
-            }
-        }
-
+        public double Objetosc => Math.Round(A * B * C, 9);
+        public double Pole => Math.Round((A * B * 2) + (A * C * 2) + (B * C * 2), 6);
         public double SumaKrawedzi => A+B+C;
 
-        public UnitOfMeasure Measure { get; set; }
+        
 
         public Pudelko(double a, double b, double c, UnitOfMeasure type)
         {
@@ -87,7 +56,7 @@ namespace PudelkoNamespace.PudelkoLib
             }
 
             if (ReturnMeters(a,type) > 10 || ReturnMeters(b, type) > 10 || ReturnMeters(c, type) > 10) {
-                throw new ArgumentOutOfRangeException("Box is too big! Max: 10x10x10 Meters.");
+                throw new ArgumentOutOfRangeException("Box is too big! Maximum dimensions: 10x10x10 Meters.");
             }
 
             _a = a;
@@ -507,7 +476,7 @@ namespace PudelkoNamespace.PudelkoLib
 
         public static Pudelko Parse(string text)
         {
-            var values = text.Split(' ', 'x', ' ');
+            var values = text.Split(' ', 'x');
             Console.WriteLine(values.Length);            
             string[] valuesTemp = new string[6];
 
@@ -593,28 +562,6 @@ namespace PudelkoNamespace.PudelkoLib
                     else return 0;
                 }
             }
-        }
-
-
-        public int Compare(Pudelko x, Pudelko y)
-        {
-            if (x.Objetosc > y.Objetosc)
-                return 1;
-            else if (x.Objetosc < y.Objetosc)
-                return -1;
-            else
-            {
-                if (x.Pole > y.Pole) return 1;
-                else if (x.Pole < y.Pole) return -1;
-                else
-                {
-                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
-                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
-                    else return 0;
-                }
-            }
-        }
-
-        
+        }     
     }
 }
