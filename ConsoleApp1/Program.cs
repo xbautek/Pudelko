@@ -2,6 +2,7 @@
 using PudelkoNamespace.PudelkoLib;
 using System.Globalization;
 using System.Security.Cryptography;
+using static PudelkoNamespace.PudelkoLib.Pudelko;
 
 namespace ConsoleApp1
 {
@@ -15,11 +16,12 @@ namespace ConsoleApp1
                
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
+                Pudelko pudlo = new();
 
                 List<Pudelko> list = new();
-
+                list.Add(new Pudelko(5, 3, 2, UnitOfMeasure.meter));
                 list.Add(new Pudelko(0.03, 0.01, 0.01,UnitOfMeasure.meter));
-                list.Add(new Pudelko(0.005, 0.03, 0.02, UnitOfMeasure.meter));
+                
                 
 
 
@@ -28,7 +30,9 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
                 }
-                list.Sort(CompareBox);
+
+                list.Sort(new Pudelko());
+
                 Console.WriteLine();
                 foreach (Pudelko p in list)
                 {
@@ -44,23 +48,6 @@ namespace ConsoleApp1
             
         }
 
-        static int CompareBox(Pudelko x, Pudelko y)
-        {
-            if (x.Objetosc > y.Objetosc)
-                return 1;
-            else if (x.Objetosc < y.Objetosc)
-                return -1;
-            else
-            {
-                if(x.Pole > y.Pole) return 1;
-                else if(x.Pole < y.Pole) return -1;
-                else
-                {
-                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
-                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
-                    else return 0;
-                }
-            }
-        }
+        
     }
 }

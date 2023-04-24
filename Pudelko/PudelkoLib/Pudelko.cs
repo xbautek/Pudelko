@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace PudelkoNamespace.PudelkoLib
 {
 
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>, IComparer<Pudelko>
     {
         private readonly double _a; 
         private readonly double _b; 
@@ -525,9 +525,9 @@ namespace PudelkoNamespace.PudelkoLib
                 throw new ArgumentException("Invalid text format", nameof(text));
             }
 
-            _ = double.TryParse(valuesTemp[0], out double a);
-            _ = double.TryParse(valuesTemp[2], out double b);
-            _ = double.TryParse(valuesTemp[4], out double c);
+            double.TryParse(valuesTemp[0], out double a);
+            double.TryParse(valuesTemp[2], out double b);
+            double.TryParse(valuesTemp[4], out double c);
 
             string unitA = valuesTemp[1];
             string unitB = valuesTemp[3];
@@ -556,5 +556,65 @@ namespace PudelkoNamespace.PudelkoLib
             double dimension = Math.Pow(p.Objetosc, (double)1/3);
             return new Pudelko(dimension, dimension, dimension);
         }
+
+        public  int CompareBox(Pudelko x, Pudelko y)
+        {
+            if (x.Objetosc > y.Objetosc)
+                return 1;
+            else if (x.Objetosc < y.Objetosc)
+                return -1;
+            else
+            {
+                if (x.Pole > y.Pole) return 1;
+                else if (x.Pole < y.Pole) return -1;
+                else
+                {
+                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
+                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
+                    else return 0;
+                }
+            }
+        }
+
+        int IComparer<Pudelko>.Compare(Pudelko? x, Pudelko? y)
+        {
+            if (x.Objetosc > y.Objetosc)
+                return 1;
+            else if (x.Objetosc < y.Objetosc)
+                return -1;
+            else
+            {
+                if (x.Pole > y.Pole) return 1;
+                else if (x.Pole < y.Pole) return -1;
+                else
+                {
+                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
+                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
+                    else return 0;
+                }
+            }
+        }
+
+
+        public int Compare(Pudelko x, Pudelko y)
+        {
+            if (x.Objetosc > y.Objetosc)
+                return 1;
+            else if (x.Objetosc < y.Objetosc)
+                return -1;
+            else
+            {
+                if (x.Pole > y.Pole) return 1;
+                else if (x.Pole < y.Pole) return -1;
+                else
+                {
+                    if (x.SumaKrawedzi > y.SumaKrawedzi) return 1;
+                    else if (x.SumaKrawedzi < y.SumaKrawedzi) return -1;
+                    else return 0;
+                }
+            }
+        }
+
+        
     }
 }
